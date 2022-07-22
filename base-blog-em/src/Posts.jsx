@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 import { PostDetail } from "./PostDetail";
@@ -15,20 +16,26 @@ export function Posts() {
   const [selectedPost, setSelectedPost] = useState(null);
 
   // replace with useQuery
-  const data = [];
-
+  // isError 는 오류 여부를 파악해줌
+  const { data, isLoading, isError } = useQuery(["posts"], fetchPosts, {
+    staleTime: 2000,
+  });
   return (
     <>
       <ul>
-        {data.map((post) => (
-          <li
-            key={post.id}
-            className="post-title"
-            onClick={() => setSelectedPost(post)}
-          >
-            {post.title}
-          </li>
-        ))}
+        {isLoading ? (
+          <div>로딩중입니다...</div>
+        ) : (
+          data.map((post) => (
+            <li
+              key={post.id}
+              className="post-title"
+              onClick={() => setSelectedPost(post)}
+            >
+              {post.title}
+            </li>
+          ))
+        )}
       </ul>
       <div className="pages">
         <button disabled onClick={() => {}}>
