@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 async function fetchComments(postId) {
   const response = await fetch(
-    `https://jsonplacehold3er.typicode.com/comments?postId=${postId}`
+    `https://jsonplaceholder.typicode.com/comments?postId=${postId}`
   );
   return response.json();
 }
@@ -25,7 +25,7 @@ async function updatePost(postId) {
 
 export function PostDetail({ post }) {
   // replace with useQuery
-  const { data, isLoading, isError } = useQuery(["getCommnet"], () =>
+  const { data, isLoading, isError } = useQuery(["getCommnet", post.id], () =>
     fetchComments(post.id)
   );
   if (isError) {
