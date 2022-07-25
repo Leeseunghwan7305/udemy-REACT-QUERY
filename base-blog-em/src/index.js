@@ -7,7 +7,7 @@ import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-let queryClient = new QueryClient();
+let queryClient = new QueryClient(); //캐시와 훅을 쓸수있게 저의
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>

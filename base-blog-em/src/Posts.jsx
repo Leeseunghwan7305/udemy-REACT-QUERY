@@ -22,7 +22,7 @@ export function Posts() {
       let nextPage = currentPage + 1;
       queryClient.prefetchQuery(["posts", nextPage], () => {
         fetchPosts(nextPage);
-      });
+      }); // 미리 캐시에 담아두기 stale가 있어도 임시로 데이터를 보여줌
     }
   }, [currentPage, useQueryClient]);
   // replace with useQuery
